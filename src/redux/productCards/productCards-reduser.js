@@ -1,9 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import {rout}
+// import {routerReducer} from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
-
+// console.log('formReducer////////', formReducer)
 const rootReducer = combineReducers({
-  form: formReducer
+  // routing: routerReducer,
+  form: formReducer,
 })
 
 // const store = createStore(rootReducer)
@@ -17,4 +18,6 @@ const rootReducer = combineReducers({
 //       {id: 'id-6', img: 'Rosie Simpson', text: 'the best product', price: '4'},
 // ]);
 
-export default rootReducer;
+const store = createStore(rootReducer)
+
+export default store;

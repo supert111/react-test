@@ -3,6 +3,18 @@ import ContactForm from '../components/ContactForm/ContactForm';
 // import styles from './HomePageView.module.css';
 
 class CartPageViews extends Component {
+
+    // state = {
+    //     firstName: '',
+    //     lastName: '',
+    //     email: '',
+
+    // };
+
+    // handleChange = (element) => {
+    //     const { name, value } = element.target;
+    //     this.setState ({ [name]: value }); 
+    // };
     // state = {
     //     // cards: [  
     //     //   {id: 'id-1',  url: '', text: 'the best product', price: '4'},
@@ -14,17 +26,17 @@ class CartPageViews extends Component {
     //     // ]
     //   };
 
+    submit = (values) => {
+        // print the form values to the console
+        console.log('values', values)
+    }
     // componentDidMount() {
     //     API.fetchPopularFilms()
     //     .then(results => {
     //         this.setState({ popularFilms: results })
     //     })
     // };
-    submit = values => {
-        // print the form values to the console
-        console.log(values)
-    }
-
+    // console.log(submit)
     render() {
         return (
             <section className=''>
