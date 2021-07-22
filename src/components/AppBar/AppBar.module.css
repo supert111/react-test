@@ -1,0 +1,7 @@
+.AppBar {
+    border-bottom: inset;
+    border-width: medium;
+    padding: 20px;
+    background-color: gray;
+    height: 40px;
+}
