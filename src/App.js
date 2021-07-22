@@ -3,6 +3,7 @@
 import { Component } from "react";
 import HomePageViews from './views/HomePageViews';
 import AppBar from './components/AppBar/AppBar';
+import CartPageViews from './views/CartPageViews';
 
 // import { Route, Switch } from 'react-router-dom';
 // import routes from './routes';
@@ -24,7 +25,7 @@ class App extends Component {
       <div className="App"> 
       <AppBar />
       <HomePageViews />
-     
+      <CartPageViews />
 
 
        {/* <Suspense fallback={<h1>Loading...</h1>}>

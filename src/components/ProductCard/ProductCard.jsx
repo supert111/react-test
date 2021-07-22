@@ -1,22 +1,27 @@
 import styles from './ProductCard.module.css';
+import webformatURL from '../../img/logo512.png'
 
 const ProductCard = ({ cards, onClick }) => {
   return (
-    <ul className={styles.cardsBlock}>
+    <div className={styles.container}>
+          <ul className={styles.cardsBlock}>
         {
-             cards.map(({ id, text, price}) =>  ( 
+             cards.map(({ id, url, text, price}) =>  ( 
+                
                 <li key={id} onClick={()=>onClick(id) } className={styles.productCard}>
-                    {/* <img id={id} src={webformatURL} alt="" className={styles.styles.productCard} /> */}
-                    <p>{text}</p>
-                    <p>{price}</p>
-                    <button className={styles.buttonCard}>Add</button>
+                    <div>
+                      <img id={id} src={url=webformatURL} alt="" className={styles.imgCard} />
+                    </div>
+                    <div className={styles.wrapperCard}>
+                      <h2 className={styles.titleCard}>{text}</h2>
+                      <p className={styles.descriptionCard}>{text}</p>
+                      <p className={styles.priceCard}>{price}</p>
+                      <button className={styles.buttonCard}>Add</button>
+                    </div>
                 </li>
             )) }
-        
-        {/* <div className={styles.productCard}>
-            <p>dfggdfsgd</p>
-        </div> */}
     </ul>
+    </div>
   );
 };
 
