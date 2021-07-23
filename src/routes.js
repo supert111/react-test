@@ -1,6 +1,6 @@
 const routes = {
     home: '/',
-    cart: 'cart',
+    cart: '/cart',
 }
 
 export default routes;

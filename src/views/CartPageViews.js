@@ -4,12 +4,16 @@ import ContactForm from '../components/ContactForm/ContactForm';
 
 class CartPageViews extends Component {
 
-    // state = {
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
+    state = {
+        firstName: '',
+        lastName: '',
+        email: '',
 
-    // };
+    };
+    
+    // componentDidUpdate(prevProps, prevState) {
+    //     this.state = {firstName, lastName, email}
+    // }
 
     // handleChange = (element) => {
     //     const { name, value } = element.target;
@@ -28,16 +32,19 @@ class CartPageViews extends Component {
 
     submit = (values) => {
         // print the form values to the console
+        const { firstName, lastName, email } = values;
+            this.setState ({ firstName, lastName, email, }); 
         console.log('values', values)
     }
     // componentDidMount() {
-    //     API.fetchPopularFilms()
-    //     .then(results => {
-    //         this.setState({ popularFilms: results })
-    //     })
-    // };
-    // console.log(submit)
-    render() {
+        //     API.fetchPopularFilms()
+        //     .then(results => {
+            //         this.setState({ popularFilms: results })
+            //     })
+            // };
+            // console.log(submit)
+            render() {
+                console.log('this.state', this.state)
         return (
             <section className=''>
                 <h1> Today </h1>
