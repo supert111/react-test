@@ -14,18 +14,11 @@ class HomePageViews extends Component {
         ]
       };
 
-    // componentDidMount() {
-    //     API.fetchPopularFilms()
-    //     .then(results => {
-    //         this.setState({ popularFilms: results })
-    //     })
-    // };
-
     render() {
 
         return (
             <section className={styles.sectionStyle}>
-                {/* <h1> Today </h1> */}
+                {/* <h1> Test </h1> */}
                 <ProductCard cards={this.state.cards} onClick={1}/>
             </section>
         )

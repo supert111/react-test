@@ -11,8 +11,6 @@ const Cart = () => {
             exact
             to={routes.cart}
             style={{ textDecoration: 'none' }}
-            // className={styles.nav_link}
-            // activeClassName={styles.nav_link_active}
         >
             <button className={styles.buttonCart}><span className={styles.textCart}>Cart</span></button>
         </NavLink>
