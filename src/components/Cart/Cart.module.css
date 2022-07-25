@@ -1,10 +1,25 @@
 .buttonCart {
     display: block;
-    margin: 0 20px 0 auto;
+    margin: 0 20px 0;
     width: 100px;
     height: 40px;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
+}
+
+.totalPrice {
+    font-size: 20px;
+    margin-left: auto;
+    color: linen;
+}
+
+.wrapperPriceAndCart {
+    display: flex;
+    align-items: center;
+}
+
+.hiddenCartLink {
+    display: none;
 }
