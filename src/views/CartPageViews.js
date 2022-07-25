@@ -1,57 +1,73 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ProductCardOrder from '../components/ProductCardOrder/ProductCardOrder';
 import styles from './CartPageViews.module.css';
+import {incremented, decremented, deleted} from '../redux/usersDefault/usersDefault-actions';
+import { buttonReset } from '../redux/productCards/productCards-actions';
 
-let total = 0;
 class CartPageViews extends Component {
-    
-    state = {
-        cards: [  
-          {id: 'id-1',  url: '', text: 'the best product', price: '4', quantity: 0,},
-          {id: 'id-2',  url: '', text: 'the best product', price: '14', quantity: 0,},
-        //   {id: 'id-3',  url: '', text: 'the best product', price: '4'},
-        //   {id: 'id-4',  url: '', text: 'the best product', price: '4'},
-        //   {id: 'id-5',  url: '', text: 'the best product', price: '4'},
-        //   {id: 'id-6',  url: '', text: 'the best product', price: '4'},
-        ],
-        customer: [],
-    };
 
     handleClick = (element) => {
-        const { name } = element.target;
-        if(name === 'decrement') {
-            total+= -1;
-        } 
-        if(name === 'increment') {
-            total+= 1;
-        } 
-        console.log('quantity', total)
-    }
-  
-    submit = (values) => {
-        const { firstName, lastName, address, phone } = values;
-        const customerData = {firstName, lastName, address, phone}; 
-        this.setState ({customer: [...this.state.customer, customerData]});
+        const { name, id } = element.target;
+        const findOrderCard = this.props.cards.filter(card => (card.id === id));
 
-        console.log('values', customerData)
+        if (findOrderCard[0].orderQuantity === 1) {
+            if (name === 'decrement') {
+                this.props.decrement(findOrderCard);
+                this.props.buttonRes(findOrderCard[0]);
+                return this.props.delete(findOrderCard)
+            } 
+        } 
+        
+        if (name === 'increment') {
+            this.props.increment(findOrderCard);
+        } 
+        
+        if (name === 'decrement') {
+            this.props.decrement(findOrderCard);
+        } 
+    }
+
+    handleGoBack = () => {
+        window.history.go(-1)  
     }
 
     render() {
-            console.log('this.state', this.state)
-            console.log('total', this.state.cards.quantity)
+
         return (
             <section className={styles.styleSection}>
                 <div className={styles.container}> 
+                    <button className={styles.button} type="button" onClick={this.handleGoBack}>
+                        🡸 Go back
+                    </button>
                     <div className={styles.wrapperBlockCart}>
-                            <ProductCardOrder cards={this.state.cards} onClick={this.handleClick} quantity={1}/>
-                            <ContactForm onSubmit={this.submit} />     
+                            <ProductCardOrder cards={this.props.cards} onClick={this.handleClick} />
+                            {
+                                (this.props.cards.length > 0) ? <ContactForm buttonDisabled = 'active'/> 
+                                    : <ContactForm />
+                            }
+                                 
                     </div>
-                    <p>Total: 3453$</p>
+                    { (this.props.totalPrice !== 0) 
+                    ? <p className={styles.priceInfo}>Total: {this.props.totalPrice}$</p>
+                    : <p className={styles.priceInfo}>Your cart is empty (</p>}
                 </div>
             </section>
         )
     }
 }
 
-export default CartPageViews;
+const mapStateToProps = state => ({
+    cards: state.defaultUser.orders,
+    totalPrice: state.defaultUser.total
+})
+
+const mapDispatchToProps = dispatch => ({
+    increment: (event) => dispatch(incremented(event)),
+    decrement: (event) => dispatch(decremented(event)),
+    delete: (event) => dispatch(deleted(event)),
+    buttonRes: (event) => dispatch(buttonReset(event)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartPageViews);

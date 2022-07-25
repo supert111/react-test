@@ -1,8 +1,9 @@
 import { Suspense, lazy } from 'react';
 import { Component } from "react";
 import AppBar from './components/AppBar/AppBar';
+import { app } from './firebase/firebaseConfig';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import routes from './routes';
 
 const HomePageViews = lazy(() =>
@@ -18,8 +19,6 @@ const NotFoundView = lazy(() =>
 );
 
 class App extends Component { 
-  state = {
-  };
 
   render() {
     return (
@@ -27,15 +26,14 @@ class App extends Component {
       <AppBar />
 
        <Suspense fallback={<h1>Loading...</h1>}>
-        <Switch>
-          <Route exact path={routes.home} component={HomePageViews} /> 
-          <Route path={routes.cart} component={CartPageView} />
-          <Route component={NotFoundView} />
-        </Switch>
+        <Routes>
+          <Route path={routes.home} element={<HomePageViews/>} /> 
+          <Route path={routes.cart} element={<CartPageView/>} />
+          <Route element={<NotFoundView/>} />
+        </Routes>
       </Suspense> 
       </div>
-
-  );
+    );
   }
 }
 export default App;

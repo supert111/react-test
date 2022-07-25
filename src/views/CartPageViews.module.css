@@ -1,6 +1,7 @@
 .container {
     padding: 0 20px;
     margin: 0 auto;
+    overflow: auto;
   }
   
   @media screen and (min-width: 480px) {
@@ -25,9 +26,17 @@
 
 .wrapperBlockCart {
     display: flex;
-    /* flex-direction: row-reverse; */
 }
 
 .styleSection {
     padding: 50px 0;
+}
+
+.priceInfo {
+  font-size: 20px;
+}
+
+.button {
+  display: block;
+  border-radius: 5px;
 }

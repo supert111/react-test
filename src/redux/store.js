@@ -1,44 +1,27 @@
-// import { 
-//     // persistStore,
-//     // persistReducer, 
-//     FLUSH,
-//     REHYDRATE,
-//     PAUSE,
-//     PERSIST,
-//     PURGE,
-//     REGISTER, 
-//   } from 'redux-persist';
-// //   import storage from 'redux-persist/lib/storage';
-//   import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-//   import rootReducer from './productCards/productCards-reduser';
-// //   import authReduser from './auth/auth-reducer';
-//   import logger from 'redux-logger';
-  
-  
-//   const middleware = [...getDefaultMiddleware({
-//     serializableCheck: {
-//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//     }, 
-//   }), logger]
-  
-// //   const authPersistConfig = {
-// //     key: 'auth',
-// //     storage,
-// //     whitelist: ['token'],
-// //   };
-  
-//   const store = configureStore({
-//     reducer: { state: rootReducer, },
-//     //   auth: persistReducer(authPersistConfig, authReduser) },
-//     middleware,
-//     devTools: process.env.NODE_ENV === 'development',
-//   });
-  
-//   // const persistor = persistStore(store);
-  
-//   // export default { store, persistor };
-//   export default { store };
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import products from './productCards/productCards-reduser';
+import defaultUser from './usersDefault/usersDefault-reduser';
+import users from './users/users-reduser';
 
-import store from './productCards/productCards-reduser';
+const composeEnhancer = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
-export default {store};
+const rootReducer = combineReducers({
+    products,
+    defaultUser,
+    users,
+
+})
+
+const persistedState = localStorage.getItem('state') 
+ ? JSON.parse(localStorage.getItem('state'))
+ : {};
+
+let store = createStore(rootReducer, persistedState, composeWithDevTools(composeEnhancer(applyMiddleware(thunk))));
+
+store.subscribe(()=>{
+  localStorage.setItem('state', JSON.stringify(store.getState()))
+})
+
+export default store;
